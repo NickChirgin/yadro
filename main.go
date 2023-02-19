@@ -10,12 +10,18 @@ import (
 
 func main() {
 	data := helpers.Parser("data.csv")
-	for _, val := range data {
-		for _, v:= range val {
+	for i, val := range data {
+		for j, v:= range val {
+			v = strings.Trim(v, " ")
 			if strings.HasPrefix(v, "=") {
-				v = strconv.Itoa(helpers.Calculate(data, v))
+				result := helpers.Calculate(data, v[1:])
+				data[i][j] = strconv.Itoa(result)
+				v = strconv.Itoa(result)
 			}
 		}
 	}
-	fmt.Println(data)
+	for _, val := range data {
+		fmt.Println(strings.Join(val, ","))
+	}
+	fmt.Println(helpers.Calculate(data, "D400/B2"))
 }
