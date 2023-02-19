@@ -7,7 +7,7 @@ import (
 
 func Calculate(csv [][]string, cell string) int {
 	cells, math := StringToCell(csv, cell)	
-	if len(cells) == 1 {
+	if math == "" {
 		if strings.HasPrefix(cells[0], "=") {
 			return Calculate(csv, cells[0][1:])
 		}
@@ -32,7 +32,7 @@ func Calculate(csv [][]string, cell string) int {
 		return num1 * num2
 	case "/":
 		if num2 == 0 {
-			return 0
+			//log.Fatal(fmt.Errorf("Division by zero in %s", cell))
 		}	else {
 			return num1/num2
 		}

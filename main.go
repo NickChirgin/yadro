@@ -10,6 +10,7 @@ import (
 
 func main() {
 	data := helpers.Parser("data.csv")
+
 	for i, val := range data {
 		for j, v:= range val {
 			v = strings.Trim(v, " ")
@@ -23,5 +24,5 @@ func main() {
 	for _, val := range data {
 		fmt.Println(strings.Join(val, ","))
 	}
-	fmt.Println(helpers.Calculate(data, "D400/B2"))
+
 }
