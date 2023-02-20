@@ -1,0 +1,5 @@
+,B,Celestial,D
+1,=B8,0,=D4/Celestial8
+4,1,=D4*Celestial8,60
+2,=D4*2,=3*11,1
+8,3,=B1-B4,5
