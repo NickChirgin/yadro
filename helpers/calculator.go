@@ -1,6 +1,8 @@
 package helpers
 
 import (
+	"fmt"
+	"log"
 	"strconv"
 	"strings"
 )
@@ -32,7 +34,7 @@ func Calculate(csv [][]string, cell string) int {
 		return num1 * num2
 	case "/":
 		if num2 == 0 {
-			//log.Fatal(fmt.Errorf("Division by zero in %s", cell))
+			log.Fatal(fmt.Errorf("Division by zero in %s", cell))
 		}	else {
 			return num1/num2
 		}

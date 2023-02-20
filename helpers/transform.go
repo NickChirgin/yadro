@@ -29,14 +29,11 @@ func StringToCell(csv [][]string, cell string) ([]string, string) {
 			if _, ok := colMap[col]; !ok {
 				log.Fatal(fmt.Errorf("Column %s doesn't exist", col))
 			}
-			/*
 			if _, ok := rowMap[val[0]]; !ok{
 				log.Fatal(fmt.Errorf("Row %s doesn't exist", val[0]))
 			}
-			*/
 			numSlice = append(numSlice, strings.Trim(csv[rowMap[val[0]]][colMap[col]], " "))
 		}
 	}
-	fmt.Println(numSlice, math)
 	return numSlice, math 
 }
