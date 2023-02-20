@@ -1,43 +1,41 @@
 package helpers
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
 )
 
-func Calculate(csv [][]string, cell string) int {
+func Calculate(csv *Excel, cell string) string {
 	cells, math := StringToCell(csv, cell)	
 	if math == "" {
 		if strings.HasPrefix(cells[0], "=") {
 			return Calculate(csv, cells[0][1:])
 		}
-		n, _ := strconv.Atoi(cells[0])
-		return n 
+		return cells[0] 
 	}
 	first, second := cells[0], cells[1]
 	if strings.HasPrefix(first, "=") {
-		first = strconv.Itoa(Calculate(csv, first[1:]))
+		first = Calculate(csv, first[1:])
 	}
 	if strings.HasPrefix(second, "=") {
-		second = strconv.Itoa(Calculate(csv, second[1:]))
+		second = Calculate(csv, second[1:])
 	}
 	num1, _ := strconv.Atoi(first)
 	num2, _ := strconv.Atoi(second)
 	switch math {
 	case "+":
-		return num1 + num2
+		return strconv.Itoa(num1 + num2)
 	case "-":
-		return num1 - num2
+		return strconv.Itoa(num1 - num2)
 	case "*":
-		return num1 * num2
+		return strconv.Itoa(num1 * num2)
 	case "/":
 		if num2 == 0 {
-			log.Fatal(fmt.Errorf("Division by zero in %s", cell))
+			log.Fatalf("Division by zero in %s", cell)
 		}	else {
-			return num1/num2
+			return strconv.Itoa(num1/num2)
 		}
 	}
-	return num1
+	return strconv.Itoa(num1)
 }
