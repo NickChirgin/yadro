@@ -1,13 +1,12 @@
 package helpers
 
 import (
-	"fmt"
 	"log"
 	"regexp"
 	"strings"
 )
 
-func StringToCell(csv [][]string, cell string) ([]string, string) {
+func StringToCell(csv *Excel, cell string) ([]string, string) {
 	cell = strings.Trim(cell, " ")
 	regexNum := regexp.MustCompile("[0-9]+")
 	split := regexNum.Split(cell, -1)
@@ -27,12 +26,12 @@ func StringToCell(csv [][]string, cell string) ([]string, string) {
 				col = split[i][1:]
 			}
 			if _, ok := colMap[col]; !ok {
-				log.Fatal(fmt.Errorf("Column %s doesn't exist", col))
+				log.Fatalf("Column %s doesn't exist", col)
 			}
 			if _, ok := rowMap[val[0]]; !ok{
-				log.Fatal(fmt.Errorf("Row %s doesn't exist", val[0]))
+				log.Fatalf("Row %s doesn't exist", val[0])
 			}
-			numSlice = append(numSlice, strings.Trim(csv[rowMap[val[0]]][colMap[col]], " "))
+			numSlice = append(numSlice, strings.Trim(csv.Table[rowMap[val[0]]][colMap[col]], " "))
 		}
 	}
 	return numSlice, math 

@@ -2,22 +2,23 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/nickchirgin/yadro/helpers"
 )
 
 func main() {
-	data := helpers.Parser("data.csv")
-
+	filePath, _  := filepath.Abs(os.Args[1])
+	fmt.Println(filePath)
+	excel := helpers.Parser(filePath)
+	data := excel.Table
 	for i, val := range data {
 		for j, v:= range val {
 			v = strings.Trim(v, " ")
 			if strings.HasPrefix(v, "=") {
-				result := helpers.Calculate(data, v[1:])
-				data[i][j] = strconv.Itoa(result)
-				v = strconv.Itoa(result)
+				data[i][j] = helpers.Calculate(&excel, v[1:])
 			}
 		}
 	}

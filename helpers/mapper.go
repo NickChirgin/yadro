@@ -1,6 +1,7 @@
 package helpers
 
-func Mapper(data [][]string) (map[string]int, map[string]int) {
+func Mapper(table *Excel) (map[string]int, map[string]int) {
+	data := table.Table
 	columnMap := map[string]int{} 
 	rowMap := map[string]int{} 
 	for i, v:= range data[0] {
